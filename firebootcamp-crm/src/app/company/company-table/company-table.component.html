@@ -16,7 +16,7 @@
               <td> {{ company.phone }} </td>
               <td class="company-actions">
                   <button class="btn btn-warning"> Edit </button>
-                  <button class="btn btn-danger" (click)="deleteCompany(company)" > Delete </button>
+                  <button class="btn btn-danger" (click)="deleteClickedEvent.emit(company)" > Delete </button>
               </td>
 
           </tr>
@@ -36,3 +36,5 @@
       } -->
   </tbody>
 </table>
+
+{{ logChanges() }}

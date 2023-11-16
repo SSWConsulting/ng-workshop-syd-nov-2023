@@ -9,6 +9,11 @@
 </h1>
 <button class="btn btn-success float-end"> Add </button>
 
+<fbc-company-table
+  [companies]="(companies$ | async) ?? []"
+  (deleteClickedEvent)="deleteCompany($event)"
+ ></fbc-company-table>
+
 
 </div>
 
@@ -17,8 +22,5 @@
     {{ (companies$ | async)![0]?.name | uppercase  }}
 </pre> -->
 
-<fbc-company-table
-  [companies]="(companies$ | async) ?? []"
-  (deleteClickedEvent)="deleteCompany($event)"
- ></fbc-company-table>
-
+<ngb-datepicker
+></ngb-datepicker>=
