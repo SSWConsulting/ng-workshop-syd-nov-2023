@@ -15,7 +15,9 @@ import { CompanyEditComponent } from './company/company-edit/company-edit.compon
   declarations: [
     AppComponent,
     CompanyListComponent,
-    CompanyTableComponent
+    CompanyTableComponent,
+    RocketComponent,
+    CompanyEditComponent
   ],
   imports: [
     BrowserModule,
