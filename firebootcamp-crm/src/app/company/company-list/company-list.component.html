@@ -1,0 +1,51 @@
+<!-- <pre>
+    {{ companies | json }}
+</pre> -->
+
+<div class="container">
+
+<h1> 
+    Super Company CRM
+</h1>
+<button class="btn btn-success float-end"> Add </button>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let company of companies">
+            <tr>
+                <td> {{ company.name }} </td>
+                <td> {{ company.email }} </td>
+                <td> {{ company.phone }} </td>
+                <td class="company-actions">
+                    <button class="btn btn-warning"> Edit </button>
+                    <button class="btn btn-danger"> Delete </button>
+                </td>
+
+            </tr>
+        </ng-container>
+\
+        <!-- @for (company of companies; track company.name) {
+            <tr>
+                <td> {{ company.name }} </td>
+                <td> {{ company.email }} </td>
+                <td> {{ company.phone }} </td>
+            </tr>
+        }
+        @empty {
+            <tr>
+                <td colspan="3"> no companies :</td>
+            </tr>
+        } -->
+    </tbody> 
+</table>
+
+<ngb-datepicker></ngb-datepicker>
+
+</div>
