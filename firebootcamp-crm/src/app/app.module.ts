@@ -9,13 +9,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyTableComponent } from './company/company-table/company-table.component';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
 import { RocketComponent } from './company/rocket/rocket.component';
+import { CompanyEditComponent } from './company/company-edit/company-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompanyListComponent,
-    CompanyTableComponent,
-    RocketComponent
+    CompanyTableComponent
   ],
   imports: [
     BrowserModule,
