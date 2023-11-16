@@ -1,28 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Company } from '../company';
+import { CompanyService } from '../company.service';
+import { Observable, Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'fbc-company-list',
   templateUrl: './company-list.component.html',
-  styleUrl: './company-list.component.scss'
+  styleUrl: './company-list.component.scss',
 })
 export class CompanyListComponent {
+  companies$!: Observable<Company[]>;
 
-companies: Company[] = [ // TODO: Strongly type the array
-    {
-      name: 'Company A', 
-      email: 'email@companyA.com',
-      phone: 12345
-    },
-    {
-      name: 'Company B', 
-      email: 'email@companyB.com',
-      phone: 12345
-    },
-    {
-      name: 'Company C', 
-      email: 'email@companyA.com',
-      phone: 12345
-    },
-  ] 
+  constructor(private companyService: CompanyService) {
+    this.companies$ = this.companyService.getCompanies();
+  }
 }

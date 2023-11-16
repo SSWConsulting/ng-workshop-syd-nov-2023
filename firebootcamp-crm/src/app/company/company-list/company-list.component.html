@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-        <ng-container *ngFor="let company of companies">
+        <ng-container *ngFor="let company of (companies$ | async)">
             <tr>
                 <td> {{ company.name }} </td>
                 <td> {{ company.email }} </td>
@@ -30,7 +30,7 @@
 
             </tr>
         </ng-container>
-\
+
         <!-- @for (company of companies; track company.name) {
             <tr>
                 <td> {{ company.name }} </td>
@@ -45,7 +45,9 @@
         } -->
     </tbody> 
 </table>
-
-<ngb-datepicker></ngb-datepicker>
-
 </div>
+
+<!-- 
+<pre>
+    {{ (companies$ | async)![0]?.name | uppercase  }}
+</pre> -->
