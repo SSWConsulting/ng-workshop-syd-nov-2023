@@ -8,12 +8,14 @@ import { CompanyListComponent } from './company/company-list/company-list.compon
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CompanyTableComponent } from './company/company-table/company-table.component';
 import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/http';
+import { RocketComponent } from './company/rocket/rocket.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompanyListComponent,
-    CompanyTableComponent
+    CompanyTableComponent,
+    RocketComponent
   ],
   imports: [
     BrowserModule,

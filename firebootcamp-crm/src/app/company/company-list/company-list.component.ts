@@ -13,7 +13,6 @@ export class CompanyListComponent {
 
   companies$!: Observable<Company[]>;
 
-
   constructor(private companyService: CompanyService) {
     this.companies$ = this.companyService.getCompanies().pipe(
       tap(() => console.log('got companies - COMPONENT')),
