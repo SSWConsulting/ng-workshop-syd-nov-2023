@@ -1,7 +1,12 @@
-<div>
-  Hello World welcome to {{ title }}
-</div>
+<nav class="navbar navbar-light bg-faded">
+  <div class="container-fluid">
+    <a class="navbar-brand">FireBootCamp CRM</a>
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item" [routerLinkActive]="'active'">
+        <a [routerLink]="['/company/list']" class="nav-link">Companies</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-<fbc-company-list>
-</fbc-company-list>
-
+<router-outlet></router-outlet>
