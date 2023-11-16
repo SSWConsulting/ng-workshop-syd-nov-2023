@@ -7,7 +7,7 @@
 <h1>
     Super Company CRM
 </h1>
-<button class="btn btn-success float-end"> Add </button>
+<a class="btn btn-success float-end" [routerLink]="['/company/add']"> Add </a>
 
 <fbc-company-table
   [companies]="(companies$ | async) ?? []"
