@@ -46,7 +46,7 @@ export class CompanyEditComponent implements OnInit {
       // email: this.formBuilder.control('')
       name: ['', [Validators.required]],
       checkPhone: [false],
-      phone: [''],
+      phone: [{ value: '', disabled: true }],
       email: [''],
     });
 
@@ -61,7 +61,6 @@ export class CompanyEditComponent implements OnInit {
       }
       phoneControl?.updateValueAndValidity();
     });
-    this.companyForm.get('checkPhone')?.setValue(false);
 
     this.companyForm.valueChanges
       .pipe(debounceTime(250))
