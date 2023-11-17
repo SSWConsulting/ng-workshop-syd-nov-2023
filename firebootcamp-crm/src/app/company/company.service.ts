@@ -8,6 +8,7 @@ import {
   catchError,
   of,
   tap,
+  timer,
 } from 'rxjs';
 
 @Injectable({
@@ -16,7 +17,7 @@ import {
 export class CompanyService {
   API_BASE = 'https://app-fbc-crm-api-prod.azurewebsites.net/api';
 
-  companies$ = new BehaviorSubject<Company[]>([]);
+  private companies$ = new BehaviorSubject<Company[]>([]);
 
   constructor(private httpClient: HttpClient) {
     this.loadCompanies();
