@@ -1,6 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { AppState } from './models/appState';
+import { provideMockStore } from '@ngrx/store/testing'
+import { By } from '@angular/platform-browser';
+
+const initialState: AppState = {
+  companies: []
+}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -11,6 +18,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [
+        provideMockStore({ initialState })
+      ]
     }).compileComponents();
   });
 
@@ -20,16 +30,22 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'firebootcamp-crm'`, () => {
+  it(`should have as title 'Sydney 🐨'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('firebootcamp-crm');
+    expect(app.title).toEqual('Sydney 🐨');
   });
 
-  it('should render title', () => {
+  it('should add 1+1 as 2', () => {
+    expect(1+1).toEqual(2)
+  })
+
+  it('should show the company count as 0', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, firebootcamp-crm');
-  });
+
+    const countElement = fixture.debugElement.query(By.css('#company-count')).nativeElement;
+
+    expect(countElement.textContent).toEqual("0");
+  })
 });
