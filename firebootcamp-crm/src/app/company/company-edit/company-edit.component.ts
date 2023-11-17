@@ -50,8 +50,7 @@ export class CompanyEditComponent implements OnInit {
       email: [''],
     });
 
-    this.companyForm.get('checkPhone')?.valueChanges
-    .subscribe(checked => {
+    this.companyForm.get('checkPhone')?.valueChanges.subscribe((checked) => {
       const phoneControl = this.companyForm.get('phone');
       if (checked) {
         phoneControl?.addValidators([Validators.required]);
@@ -64,22 +63,18 @@ export class CompanyEditComponent implements OnInit {
     });
     this.companyForm.get('checkPhone')?.setValue(false);
 
-    this.companyForm.valueChanges.pipe(
-      debounceTime(250),
-    ).subscribe((value) =>
-      console.log('form changed', value)
-    );
+    this.companyForm.valueChanges
+      .pipe(debounceTime(250))
+      .subscribe((value) => console.log('form changed', value));
   }
 
   getCompany(): void {
-    this.companyService
-      .getCompany(this.companyId)
-      .subscribe((company) => {
-        this.companyForm.patchValue({
-          ...company,
-          checkPhone: !!company.phone,
-        });
+    this.companyService.getCompany(this.companyId).subscribe((company) => {
+      this.companyForm.patchValue({
+        ...company,
+        checkPhone: !!company.phone,
       });
+    });
   }
 
   saveCompany() {
