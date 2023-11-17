@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Company } from '../company';
 import { CompanyService } from '../company.service';
-import { Observable, Subscription, catchError, filter, finalize, of, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, catchError, filter, finalize, of, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
