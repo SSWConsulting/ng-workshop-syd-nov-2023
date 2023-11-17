@@ -33,7 +33,7 @@ export class CompanyEditComponent implements OnInit {
     this.buildForm();
 
     if (!this.isNewCompany) {
-      //TODO: this.getCompany()
+      this.getCompany();
     }
   }
 
@@ -53,14 +53,33 @@ export class CompanyEditComponent implements OnInit {
     );
   }
 
+  getCompany(): void {
+    this.companyService
+      .getCompany(this.companyId)
+      .subscribe((company) => this.companyForm.patchValue(company));
+  }
+
   saveCompany() {
     const { valid, value } = this.companyForm;
     // const valid = this.companyForm.valid;
     // const value = this.companyForm.value;
     if (valid) {
-      this.companyService
-        .addCompany(value)
-        .subscribe((_) => this.router.navigateByUrl('/company/list'));
+      if (this.isNewCompany) {
+        this.companyService
+          .addCompany(value)
+          .subscribe((_) => this.router.navigateByUrl('/company/list'));
+      } else {
+        const updatedCompany = {
+          id: this.companyId,
+          ...value,
+          // name: value.name,
+          // email: value.email,
+          // phone: value.phone,
+        };
+        this.companyService
+          .updateCompany(updatedCompany)
+          .subscribe((_) => this.router.navigateByUrl('/company/list'));
+      }
     }
   }
 }
