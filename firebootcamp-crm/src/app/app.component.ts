@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CompanyService } from './company/company.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,9 @@ export class AppComponent {
   title = 'Sydney 🐨';
   currentDate = new Date();
 
+  companies$ = this.companyService.getCompanies();
+
+  constructor(
+    private companyService: CompanyService,
+  ) {}
 }
