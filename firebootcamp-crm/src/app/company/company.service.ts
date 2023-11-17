@@ -17,24 +17,13 @@ import {
 export class CompanyService {
   API_BASE = 'https://app-fbc-crm-api-prod.azurewebsites.net/api';
 
-  private companies$ = new BehaviorSubject<Company[]>([]);
-
-  constructor(private httpClient: HttpClient) {
-    this.loadCompanies();
-  }
-
-  private loadCompanies(): void {
-    this.httpClient
-      .get<Company[]>(`${this.API_BASE}/company`)
-      .pipe(
-        tap(() => console.log('got companies - SERVICE')),
-        catchError(this.handleError<Company[]>)
-      )
-      .subscribe((companies) => this.companies$.next(companies));
-  }
+  constructor(private httpClient: HttpClient) {}
 
   getCompanies(): Observable<Company[]> {
-    return this.companies$;
+    return this.httpClient.get<Company[]>(`${this.API_BASE}/company`).pipe(
+      tap(() => console.log('got companies - SERVICE')),
+      catchError(this.handleError<Company[]>)
+    );
   }
 
   getCompany(companyId: number): Observable<Company> {
@@ -46,28 +35,19 @@ export class CompanyService {
   addCompany(company: Company): Observable<Company> {
     return this.httpClient
       .post<Company>(`${this.API_BASE}/company`, company)
-      .pipe(
-        catchError(this.handleError<Company>),
-        tap(() => this.loadCompanies())
-      );
+      .pipe(catchError(this.handleError<Company>));
   }
 
   updateCompany(company: Company): Observable<Company> {
     return this.httpClient
       .put<Company>(`${this.API_BASE}/company/${company.id}`, company)
-      .pipe(
-        catchError(this.handleError<Company>),
-        tap(() => this.loadCompanies())
-      );
+      .pipe(catchError(this.handleError<Company>));
   }
 
   deleteCompany(company: Company): Observable<Company> {
     return this.httpClient
       .delete<Company>(`${this.API_BASE}/company/${company.id}`)
-      .pipe(
-        catchError(this.handleError<Company>),
-        tap(() => this.loadCompanies())
-      );
+      .pipe(catchError(this.handleError<Company>));
   }
 
   private handleError<T>(err: any) {

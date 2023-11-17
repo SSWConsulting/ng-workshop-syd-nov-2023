@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { CompanyService } from './company/company.service';
 import { map } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from './models/appState';
+import { selectCompaniesCount } from './state/company.selectors';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +14,7 @@ export class AppComponent {
   title = 'Sydney 🐨';
   currentDate = new Date();
 
-  companyCount$ = this.companyService
-    .getCompanies()
-    .pipe(map((companies) => companies.length));
+  companyCount$ = this.store.select(selectCompaniesCount);
 
-  constructor(private companyService: CompanyService) {}
+  constructor(private store: Store<AppState>) {}
 }
