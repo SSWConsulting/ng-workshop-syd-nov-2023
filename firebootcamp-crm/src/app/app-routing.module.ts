@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CompanyListComponent } from './company/company-list/company-list.component';
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
 import { RocketComponent } from './company/rocket/rocket.component';
+import { isAdminGuard } from './is-admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'company/list', pathMatch: 'full' },
@@ -10,6 +11,7 @@ const routes: Routes = [
   { path: 'company/list', component: CompanyListComponent },
   { path: 'company/add', component: CompanyEditComponent },
   { path: 'company/edit/:id', component: CompanyEditComponent },
+  { path: 'admin', canActivate: [isAdminGuard], loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
 ];
 
 @NgModule({
