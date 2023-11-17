@@ -45,9 +45,24 @@ export class CompanyEditComponent implements OnInit {
       // phone: this.formBuilder.control(''),
       // email: this.formBuilder.control('')
       name: ['', [Validators.required]],
+      checkPhone: [false],
       phone: [''],
       email: [''],
     });
+
+    this.companyForm.get('checkPhone')?.valueChanges
+    .subscribe(checked => {
+      const phoneControl = this.companyForm.get('phone');
+      if (checked) {
+        phoneControl?.addValidators([Validators.required]);
+        phoneControl?.enable();
+      } else {
+        phoneControl?.clearValidators();
+        phoneControl?.disable();
+      }
+      phoneControl?.updateValueAndValidity();
+    });
+    this.companyForm.get('checkPhone')?.setValue(false);
 
     this.companyForm.valueChanges.pipe(
       debounceTime(250),
@@ -59,7 +74,12 @@ export class CompanyEditComponent implements OnInit {
   getCompany(): void {
     this.companyService
       .getCompany(this.companyId)
-      .subscribe((company) => this.companyForm.patchValue(company, ));
+      .subscribe((company) => {
+        this.companyForm.patchValue({
+          ...company,
+          checkPhone: !!company.phone,
+        });
+      });
   }
 
   saveCompany() {
