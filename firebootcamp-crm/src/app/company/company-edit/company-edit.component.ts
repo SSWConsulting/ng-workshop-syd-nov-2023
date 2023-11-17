@@ -8,6 +8,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'fbc-company-edit',
@@ -48,7 +49,9 @@ export class CompanyEditComponent implements OnInit {
       email: [''],
     });
 
-    this.companyForm.valueChanges.subscribe((value) =>
+    this.companyForm.valueChanges.pipe(
+      debounceTime(250),
+    ).subscribe((value) =>
       console.log('form changed', value)
     );
   }
@@ -56,7 +59,7 @@ export class CompanyEditComponent implements OnInit {
   getCompany(): void {
     this.companyService
       .getCompany(this.companyId)
-      .subscribe((company) => this.companyForm.patchValue(company));
+      .subscribe((company) => this.companyForm.patchValue(company, ));
   }
 
   saveCompany() {
